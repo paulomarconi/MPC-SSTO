@@ -1,0 +1,28 @@
+\begin{tikzpicture}[scale=0.4,font=\tiny]
+
+\draw   (-1.5,5.5)  rectangle (0.5,3.5)  ;
+\draw (-1.5,3.5) --  (0.5,3.5) node[below,midway]{Round 1};
+%%
+\draw   (-1.5,2.5)  rectangle (0.5,0.5)  ;
+\draw (-1.5,0.5) --  (0.5,0.5) node[below,midway]{Round 2};
+\draw [-stealth] (-1,4) node (v6) {} ellipse (0.1 and 0.1);
+\draw [-stealth] (-0.5,1.5) node (v7) {} ellipse (0.1 and 0.1);
+\draw [-stealth](v6) -- (-0.5828,4.2414);
+\draw [-stealth](v7);
+\draw [-stealth](v7) -- (0,1.5);
+
+%
+\draw   (-1.5,-0.5)  rectangle (0.5,-2.5)  ;
+\draw (-1.5,-2.5) --  (0.5,-2.5) node[below,midway]{Round 3};
+\draw [-stealth] (-0.5,-1) node (v5) {} ellipse (0.1 and 0.1);
+\draw [-stealth](v5) -- (-0.5,-1.5);
+\draw [-stealth](v7);
+
+%
+\draw   (-1.5,-3.5)  rectangle (0.5,-5.5)  ;
+\draw (-1.5,-5.5) --  (0.5,-5.5) node[below,midway]{Round 4};
+\draw [-stealth] (-0.5,-5) node (v9) {} ellipse (0.1 and 0.1);
+\draw [-stealth](v7);
+\draw [-stealth](v9) -- (-0.5,-4.5);
+
+\end{tikzpicture}

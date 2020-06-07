@@ -1,0 +1,618 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+%In case you encounter the following error:
+%Error 1010 The PDF file may be corrupt (unable to open PDF file) OR
+%Error 1000 An error occurred while parsing a contents stream. Unable to analyze the PDF file.
+%This is a known problem with pdfLaTeX conversion filter. The file cannot be opened with acrobat reader
+%Please use one of the alternatives below to circumvent this error by uncommenting one or the other
+%\pdfobjcompresslevel=0
+%\pdfminorversion=4
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\usepackage[T1]{fontenc} %para los separación de palabras "can-ción"
+\usepackage{amsmath,amssymb,amsfonts,latexsym,textcomp}
+\usepackage{array,multirow,booktabs,tabulary} %tablas y arrays
+\usepackage{graphicx} 
+\usepackage{caption,float,subfigure} %float=figuras flotantes.
+\usepackage{verbatim}  %texto raw 
+\usepackage[ampersand]{easylist}
+\usepackage{color}
+\usepackage[usenames,dvipsnames,svgnames,table,x11names]{xcolor} 
+\usepackage{multicol}
+
+\usepackage{tikz}
+\usetikzlibrary{automata,arrows} 
+%\tikzset{every picture/.style={/utils/exec={\ttfamily}}}
+
+%---- Fig command
+%\newcommand{\figref}[1]{\figurename~\ref{#1}}
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+
+
+%---- Bibliografia bibtex+biblatex -----------------------------------------
+%\usepackage[backend=bibtex,natbib,sorting=none]{biblatex} %backref=hyperlinks de inversa, e.g.(vid. pag. xx)	
+%\bibliography{vrep.bib} 
+
+
+%\usepackage[backend=biber,style=ieee]{biblatex}
+%\addbibresource{biblatex-ieee.bib}
+%\bibliography{vrep.bib}
+%
+
+%\usepackage[backend=bibtex,style=IEEtran,natbib=true]{biblatex} 
+%\renewcommand{\bibfont}{\footnotesize} % for IEEE bibfont size
+%\addbibresource{vrep.bib}
+
+%\usepackage{IEEEtran}
+%\bibliographystyle{IEEEtran}
+%\bibliography{vrep.bib} 
+
+%\usepackage[numbers]{natbib}
+%\bibliographystyle{IEEEtranN}
+%\bibliography{vrep.bib} 
+
+
+%---- Hyperlinks  ----------------------------------------------------------
+\usepackage[ %
+breaklinks, %
+colorlinks=true, %
+linkcolor=black, %
+citecolor=black, %
+urlcolor=black %
+]{hyperref} 
+\urlstyle{same}
+
+%---- Usar otros fonts + símbolo \degree -----------------------------------
+\newcommand*{\myfont}{\fontfamily{lmtt}\selectfont}
+\DeclareTextFontCommand{\textmyfont}{\myfont}	
+\usepackage{gensymb} 
+
+
+%---- Code highlighting con Listings ---------------------------------------
+\usepackage{listings}	
+\definecolor{mygreen}{rgb}{0.5,0.6,0.5}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mygray2}{rgb}{0.9764, 0.9764, 0.9762}
+%---- Config listings ------------------------------------------------------
+\lstset{ %
+	backgroundcolor=\color{mygray2},	% background color \color{mygray2}
+	basicstyle=\footnotesize\ttfamily,	% tamaño de las letras y tipo de letra
+	breaklines=true,	% corte de linea (line breaking)solo en espacio blanco
+	captionpos=b,		% posicion del caption b,t,n (top,bottom,none)
+	commentstyle=\color{ForestGreen},	% estilo del comentario
+	%escapeinside={\%*}{*},	% si se desea agregar codigo Latex dentro el codigo debe ser %*codigo latex*
+	frame=none,	% agrega marco al codigo (single)
+	frameround=tttt,	% redondear el marco
+	keepspaces=true,	% mantiene los espacios en el texto, util para mantener la indentacion del codigo (uso posible en columns=flexible)
+	keywordstyle=\color{blue},	% estilo de los keywords
+	stringstyle=\color{mymauve},	% estilo del string
+	numbers=left,	% donde poner los numeros de linea, (none, left, right)
+	numbersep=5pt,	% cuan lejos los numeros de linea estan del codigo
+	xleftmargin=0pt,	% margen izquierdo
+	showspaces=false,	% muestra espacios de codigo en todas partes usando el caracter barra baja "_", sobreescribe el comando 'showstringspaces'
+	showstringspaces=false,	% muestra espacios solo en los strings
+	tabsize=2,	% tabulacion por defecto =2
+	title=\lstname	% muestra el nombre de lo archivos incluidos con \lstinputlisting; tambien se puede tratar con caption en vez de title
+}	
+%---- Config personalizada del caption -------------------------------------
+\DeclareCaptionFont{white}{\color{black}}
+\DeclareCaptionFormat{listing}{
+	%	\colorbox[cmyk]{0.43, 0.35, 0.35, 0.01 }{
+	%		\parbox{0.96\linewidth}{\hspace{15pt}#1#2#3}
+	%	}
+	\colorbox{white}{
+		\parbox{0.96\linewidth}{\centering #1#2#3}
+	}
+}
+\captionsetup[lstlisting]{ format=listing, 
+	labelfont=white, 
+	textfont=white, 
+	singlelinecheck=false, 
+	margin=0pt, 
+	font={bf,footnotesize} }
+%---- Caracteres especiales ------------------------------------------------	
+% Por defecto, listings no soporta inputec para mostrar los acentos y caracteres especiales.
+% para manejar utf8 se debe enlistar los caracteres segun:
+\lstset{literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{?}{{\oe}}1 {?}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{ñ}{{\~n}}1 {£}{{\pounds}}1 {°}{{\degree}}1 
+}		
+%---- Macro de inclusión de documentos con listings ------------------------
+% [2]=numero de argumentos, #1=argumento 1, #2=argumento 2
+\newcommand{\includecode}[2]{\lstinputlisting[language=#1, caption=#2, label=#2]{#2}}			
+\renewcommand{\lstlistingname}{Script}
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------------------
+\title{\LARGE \bf Constrained Model Predictive Control using Feedforward Steady-State Target Optimization tracking approach for an Isolated Power System}
+
+%\author{Albert Author$^{1}$ and Bernard D. Researcher$^{2}$% <-this % stops a space
+\author{ %
+	Paulo R. Loma Marconi$^{1}$% <-this % stops a space
+	%\thanks{*This work was not supported by any organization}% <-this % stops a space
+	%\thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science, University of Twente, 7500 AE Enschede, The Netherlands {\tt\small albert.author@papercept.net} }%	
+	\thanks{$^{1}$The author is with the Department of Automatic Control Systems Engineering, The University of Sheffield, UK {\tt\small prlomamarconi1@sheffiel.ac.uk} }%	
+	%\thanks{$^{2}$Bernard D. Researcheris with the Department of Electrical Engineering, Wright State University, Dayton, OH 45435, USA {\tt\small b.d.researcher@ieee.org}}%
+}
+
+%==============================================================================================
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+	A constrained Linear Quadratic Model Predictive Model Control (LQ-MPC) with offset-free tracking and disturbance rejection using the Feedforward Steady-State Target Optimization (SSTO) approach is presented in this paper. The MPC control law uses Finite-Receding-Horizon method in dual-mode. Moreover, the stability and recursive feasibility are guaranteed by off-line dual-mode and on-line optimization. The results are presented by simulation.
+	
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{STATE-SPACE MODEL OF THE SYSTEM}
+The isolated power system \cite{trodden} to be studied is a linear Single-Input Single-Output (SISO) model with the addition of the disturbance in the output, \figref{fig:plant}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/plant.png}
+	\caption{Isolated power system}
+	\label{fig:plant}
+\end{figure}
+
+The linear continuous-time state-space model is as follows,
+\begin{equation}\label{eq:model}
+\begin{aligned}
+\begin{bmatrix}
+	\Delta\dot{\omega} \\
+	\Delta\dot{p}^m \\	 
+	\Delta\dot{p}^v \\
+\end{bmatrix}
+&=
+\begin{bmatrix}
+	-D/M & 1/M & 0 \\
+	0 & -1/T^t & -1/T^t \\
+	-1/(RT^g) & 0 & -1/T^g
+\end{bmatrix}
+\begin{bmatrix}
+	\Delta \omega \\
+	\Delta p \\	 
+	\Delta p^v 
+\end{bmatrix}
+\\
+&\qquad\quad
++
+\begin{bmatrix}
+	0 \\
+	0 \\
+	1/T^g
+\end{bmatrix}
+\Delta p^{ref}
++
+\begin{bmatrix}
+	-1/M \\
+	0 \\
+	0
+\end{bmatrix}
+\Delta p^d\\
+\Delta f &=
+\begin{bmatrix}
+	50 & 0 & 0 
+\end{bmatrix}
+\begin{bmatrix}
+	\Delta \omega \\
+	\Delta p \\	 
+	\Delta p^v 
+\end{bmatrix}
++ 
+\Delta p^d
+\end{aligned}
+\end{equation}
+where $\Delta f$ is the output values, $\Delta p^{ref}$ is the input, and $\Delta p^d$ is the disturbance, the rest of the parameters can be consulted at \cite{trodden}.
+
+Thus, the Discrete Linear Time-Invariant (LTI) state-space system is
+\begin{equation}\label{eq:discrete_model}
+\begin{aligned}
+x(k+1) &= A~x(k)+B~u(k)+B_d~d(k)\\
+y(k) &= C~x(k)+D_d~d(k), \quad k=0,1,2,\dots
+\end{aligned}
+\end{equation}
+where $x\in\mathbb{R}^n$, $u\in\mathbb{R}^m$, $y\in\mathbb{R}^p$, and $d\in\mathbb{R}^q$ are the states, input, output, and disturbance vectors respectively. $A,B,C,$ are the state, input, and output matrices, and $B_d,D_d$ are the disturbance matrices in the input, and in the output. 
+
+\section{FORMULATION OF THE LQ-MPC TRACKING PROBLEM}
+\subsection{Feedforward tracking with SSTO}
+The Feedfoward tracking approach by SSTO requires a target optimizer that calculates the steady-state values for the states $x_{ss}$ and the input $u_{ss}$ given a reference $r$ in the presence of a disturbance $d$, \figref{fig:SSTO_model}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/SSTO}
+	\caption{MPC and SSTO model}
+	\label{fig:SSTO_model}
+\end{figure}
+
+\subsection{Cost function}
+Because it is desired that $x\rightarrow x_{ss}$ and $u\rightarrow u_{ss}$, new variables can be defined as $\xi\equiv x-x_{ss}$ and $v\equiv u-u_{ss}$, where $\xi \rightarrow 0$ and $v\rightarrow 0$. 
+
+Therefore, the constrained LQ-MPC problem is to minimize the cost function 
+\begin{equation}\label{eq:cost_fn}
+\begin{alignedat}{2}
+	{\rm I\!P}_N (v(k)): \min_{v(k)}\sum_{j=0}^{N-1}&{} (\xi^\intercal(k+j|k)~Q~\xi(k+j|k)\\
+	&{}+ v^\intercal(k+j|k)~R~v(k+j|k))\\
+	&{}+ \xi^\intercal(k+N|k)~P~\xi(k+N|k)
+\end{alignedat}
+\end{equation}
+subject to, for $ j=0,1,2,\dots,N-1$
+\begin{align}
+\xi(k+1+j|k) &= A~\xi(k+j|k)+B~v(k+j|k) \nonumber\\
+\xi(k|k) &= \xi(k) \nonumber\\
+P_x~\xi(k+j|k) &\leq q_x -P_x~x_{ss}\label{eq:Px}\\
+P_u~v(k+j|k) &\leq q_u -P_u~u_{ss}\label{eq:Pu}\\
+P_{x_N}~\xi(k+N|k) &\leq \tilde{q}_{x_N} \label{eq:PxN}
+\end{align}
+where $Q$ and $R$ are weight matrices, $P$ is the terminal cost matrix, \eqref{eq:Px}, \eqref{eq:Pu}, \eqref{eq:PxN} are the linear inequality (polyhedra) constraints, and $N$ is the finite-horizon value. Note that $B_d,D_d$ and $d$ are not present because the SSTO will manage the disturbance rejection.
+
+\subsection{Defining the inequality constraints}
+Given $|\Delta p^{ref}|=|u|\leq u_{min,max}$, and $|\Delta f|=|y|\leq y_{min,max}$, for $y=C~x$, 
+\begin{align*}
+\begin{bmatrix}
+	C \\
+	-C
+\end{bmatrix}
+	x(k+j|k) & \leq
+\begin{bmatrix}
+	y_{max}\\
+	-y_{min}
+\end{bmatrix}
+\\
+\begin{bmatrix}
+	I \\
+	-I
+\end{bmatrix}
+	u(k+j|k) & \leq
+\begin{bmatrix}
+	u_{max}\\
+	-u_{min}
+\end{bmatrix}
+\end{align*}
+can be written in terms of $\xi$ and $v$ as follows,
+\begin{equation}\label{eq:constraintsLQ-MPC}
+\begin{aligned}
+{\underbrace{
+\begin{bmatrix}
+	C \\
+	-C
+\end{bmatrix}}_{P_x}
+}
+	\xi(k+j|k) & \leq
+{\underbrace{
+\begin{bmatrix}
+	y_{max}\\
+	-y_{min}
+\end{bmatrix}}_{q_x}
+}
+-
+{\underbrace{
+\begin{bmatrix}
+	C \\
+	-C
+\end{bmatrix}}_{P_x}
+}
+	x_{ss}
+%
+\\
+{\underbrace{
+\begin{bmatrix}
+	I \\
+	-I
+\end{bmatrix}}_{P_u}
+}
+	v(k+j|k) & \leq
+{\underbrace{
+\begin{bmatrix}
+	u_{max}\\
+	-u_{min}
+\end{bmatrix}}_{q_u}
+}
+-
+{\underbrace{
+\begin{bmatrix}
+	I \\
+	-I
+\end{bmatrix}}_{P_u}
+}
+	u_{ss}
+\end{aligned}
+\end{equation}
+and using a proper deadbeat mode-2 terminal inequality constraint to ensure a fast convergence to zero,
+\begin{equation}
+\begin{aligned}
+&
+{\underbrace{
+	\textbf{I}_{n\times n}\otimes
+	\begin{bmatrix}
+	P_x\\
+	P_u~K
+	\end{bmatrix}
+	\begin{bmatrix}
+		(A+BK_\infty)^0\\
+		\vdots\\
+		(A+BK_\infty)^{N-1}
+	\end{bmatrix}
+}_{P_{x_N}}
+}
+\xi(k+N|k)
+\\
+& \qquad\qquad\qquad\qquad\qquad \leq 
+{\underbrace{
+	\textbf{1}_n \otimes 
+	\begin{bmatrix}
+		q_x-Px~x_{ss}\\
+		q_u-P_u~u_{ss}
+	\end{bmatrix}
+}_{\tilde{q}_{x_N}}
+}
+\end{aligned}
+\end{equation}
+where $K_\infty$ is the deadbeat mode-2 gain calculated using Linear Quadratic Regulator (LQR) method.
+
+\subsection{Target equilibrium optimization under constraints (SSTO)}
+The offset-free equilibrium points $(x_{ss},u_{ss})$ that satisfies the constraints exits if only if $x_{ss}=A x_{ss}+B u_{ss}+B_d d$ and $y_{ss}=C x_{ss}+D_d d=r$. 
+
+Thus, the SSTO problem is
+\begin{align}\label{eq:SSTO}
+\min_{\left\lbrace x_{ss},u_{ss} \right\rbrace } \|C~x_{ss}+D_d~d-r\|+\rho \|u_{ss}\|
+\end{align}
+subject to
+\begin{equation}\label{eq:constraintsSSTO}
+\begin{aligned}
+{\underbrace{
+	\begin{bmatrix}
+		I-A & -B\\
+		C & 0
+	\end{bmatrix}}_{A_{eq}}
+}
+{\underbrace{
+	\begin{bmatrix}
+		x_{ss}\\
+		u_{ss}
+	\end{bmatrix}}_{x_{eq}}
+}
+&=
+{\underbrace{
+	\begin{bmatrix}
+		Bd~d\\
+		r-D_d~d
+	\end{bmatrix}}_{b_{eq}}
+}
+\\
+{\underbrace{
+		\begin{bmatrix}
+		P_x & 0\\
+		0 & P_u
+		\end{bmatrix}}_{A_{neq}}
+}
+{\underbrace{
+		\begin{bmatrix}
+		x_{ss}\\
+		u_{ss}
+		\end{bmatrix}}_{x_{neq}}
+}
+&\leq
+{\underbrace{
+		\begin{bmatrix}
+		q_x\\
+		q_u
+		\end{bmatrix}}_{b_{neq}}
+}
+\end{aligned}
+\end{equation}
+
+\section{SOLVING THE LQ-MPC OPTIMIZATION PROBLEM}
+The solution of the LQ-MPC problem \eqref{eq:cost_fn} in the compress form  can written as,
+\begin{align}\label{eq:LQ-MPCprob}
+	\min_{v(k)} \frac{1}{2}\textbf{v}^\intercal(k)~H~\textbf{v}(k) + \xi^\intercal(k)~L^\intercal~\textbf{v}(k)+\xi^\intercal(k)~M~\xi(k)
+\end{align}
+subject to
+\begin{align}\label{eq:constrainMatricesLQ-MPC}
+	P_c \textbf{v}(k) \leq q_c+S_c~\xi(k)
+\end{align}
+where $H,L,M$ are the cost matrices given $Q$ and $R$. $P_c,q_c,S_c$ are the stacked inequality constraints for $P_x,P_u,P_{x_N},q_u,q_x,\tilde{q}_{x_N}$ given the predictions matrices $\textbf{x}=Fx(k)+G\textbf{u}(k)$, \cite{trodden}. Note that the prediction matrices are constructed using the states and input without the tracking model.
+
+The solution of \eqref{eq:LQ-MPCprob} is the optimal control input sequence,
+\begin{align*}
+	\textbf{v}^*=\left\lbrace v^*(k|k),v^*(k+1|k),\dots,v^*(k+N-1|k) \right\rbrace
+\end{align*}
+which can be solved numerically.
+
+Because MPC uses the receding-horizon principle, only the first optimized control input is needed
+\begin{align*}
+	v(k)=v^*(k|k)=K_N(\xi(k))
+\end{align*}
+but the real control input applied to the system is
+\begin{align}\label{eq:real_nu}
+	u(k)=u_{ss}+v^*(k|k)
+\end{align}
+
+
+\subsection{Stability}
+In order to ensure stability it is necessary to compute a terminal cost matrix $P$ that satisfies the Lyapunov equation 
+\begin{equation}\label{eq:lyapunov}
+	(A+B~K)^\intercal P(A+B~K)-P+(Q+K^\intercal R~K)=0
+\end{equation}
+which solution can be computed numerically. A good approach is to use a deadbeat mode-2 control gain $K$ that converges the states to the origin $x=0$ as long as $(A+BK)$ is stable, which means that the eigenvalues $\lambda$ are inside the unit circle $|\lambda| < 1$.
+ 
+
+%\subsection{Feasibility}
+%stability = p21 L17, without constraints \\
+%feasibility implies stability by terminal constraint PxN, L18. 24/30 L10
+
+\section{ALGORITHM FOR THE IMPLEMENTATION}
+Now that the solution of the LQ-MPC is established and the stability can be guaranteed, there are basic conditions to meet such as, 
+\Activate
+\begin{easylist}[itemize]	
+	\ListProperties(Space1=0cm,Space1*=0cm,Space2=0cm,Space2*=0cm)
+	& $(A,B)$ is stabilizable which can be proved by the controllability, in Matlab \verb|rank(ctrb(A,B))|.
+	& $Q\succeq 0$, can be $C^\intercal C$	
+	& $R\succ 0$, changed later for tuning.
+\end{easylist}
+\Deactivate
+
+The following steps reflect the Matlab implementation algorithm
+
+\textit{Off-line mode:}
+\Activate
+\begin{easylist}[enumerate]	
+	\ListProperties(Space1=0cm,Space1*=0cm,Space2=0cm,Space2*=0cm)
+	& Discretization of the model \eqref{eq:model} using zero holder (zoh), in Matlab will be \verb|sys=c2d(idss(Ac,Bc,C,D,Bd,x0,0),Ts)|, where $T_s$ is the sampling time.
+	& Construct the target equilibrium constraints \eqref{eq:constraintsSSTO} 
+	& Define the optimization equation as \verb|z=[xss;uss]| and \verb|fun=@(z) C(1)*z(1)+Dd*d-r+rho*z(4)|
+	& Solve the optimization problem for SSTO using \verb|f=fmincon(fun,z0,Aneq,bneq,Aeq,beq)| in Matlab, where \verb|z0=[r,0,0,0]|, \verb|fun| is \eqref{eq:SSTO}, and \verb|f=[xss,uss]| is the optimized vector solution.
+	& Construct the LQ-MPC inequality constraints \eqref{eq:LQ-MPCprob}, and compute the deadbeat mode-2 terminal constraint using \verb|K=-dlqr(A,B,Q,R)|.
+	& Construct the prediction matrices $F,G$ using \verb|[F,G]=|\verb|predict_mats(A,B,N)| and the constraint matrices \eqref{eq:constrainMatricesLQ-MPC} using  {\small\verb|[Pc,qc,Sc]=...|  \verb|constraint_mats(F,G,Pu,qu,Px,qx,PxN,qxN);|}
+	& Compute the deadbeat mode-2 control $Kl$ using \verb|Kl=-acker(A,B,[0,0,0])|
+	& Calculate the Lyapunov solution of \eqref{eq:lyapunov} with  \verb|P=dlyap((A+B*K)',Q+K'*R*K)|, which gives a terminal cost matrix $P$ that guaranties stability.
+	& Finally before the on-line mode is initiated, set the initial conditions as \verb|x=[0;0;0;]|	
+\end{easylist}
+\Deactivate
+\vspace{1em}
+\textit{On-line mode: iteration for $k$ steps}
+\Activate
+\begin{easylist}[enumerate]	
+	\ListProperties(Space1=0cm,Space1*=0cm,Space2=0cm,Space2*=0cm)	
+	& Recall steps 3-4 of the off-line mode for the SSTO optimization but at each iteration \verb|z0=[x;us(1,k)]|, where \verb|us(1,k)| is the first optimized control input.
+	& Calculate $\xi(k)$ and $v(k)$ using \verb|xi(:,k)=x-xss| \verb|v(:,k)=us(:,k)-uss|.
+	& Compute the constraints \eqref{eq:constraintsSSTO} with the new $x_{ss}$ and $u_{ss}$
+	& Compute \eqref{eq:constrainMatricesLQ-MPC} like it was done in the off-line mode step 6.
+	& Store the states \verb|xs(:,k)=x| for the iteration process.
+	& Solve the LQ-MPC optimization problem \eqref{eq:LQ-MPCprob} without using the matrix $M$ as follows, {\small\verb|[v,fval,flag]=quadprog(H,L*xi(:,k),...| \verb|Pc,qc+Sc*xi(:,k))|} where \verb|v| is the optimal control input $v(k)$
+	& Check feasibility using \verb|flag|, if it is $<1$ the solution is infeasible.
+	& Use \eqref{eq:real_nu} as the real control input applied to the system, \verb|   us(:,k)=v(1)+uss| using only the first optimized value (receding principle).
+	& Close the loop \eqref{eq:discrete_model}, \verb|x=A*x+B*us(1,k)+Bd*d| \verb|y=C*xs+Dd*d|
+	& Calculate the cost value of \eqref{eq:LQ-MPCprob} using the matrix $M$.
+	& Return to step 1.
+\end{easylist}
+\Deactivate
+
+
+\section{DESIGN REQUIREMENTS}
+For the simulation the following specifications are demanded,
+\Activate
+\begin{easylist}[itemize]	
+	\ListProperties(Space1=0cm,Space1*=0cm,Space2=0cm,Space2*=0cm)
+	& Reference $r=0.3$
+	& Frequency settles to $|\Delta f|=|y|\leq 0.01$ within 2 [s] of the disturbance initiaion.
+	& $|\Delta p^{ref}|=|u|\leq 0.5$, and $|\Delta f|=|y|\leq 0.5$.
+	& Zero steady-state error in the output.
+\end{easylist}
+\Deactivate
+
+\section{SIMULATION AND RESULTS}
+The tuning and design parameters, as well as the simulation value results are shown in Table\ref{tab:tab}
+
+\begin{table}[!ht]
+	\centering
+	\scalebox{1}{
+		\begin{tabular}{>{\bfseries}c|c}
+			 \textbf{Parameter}& \textbf{Value}   \\ \hline
+			$Q$  & $C^\intercal C$ \\ \hline
+			$R$  & $0.08$ \\ \hline
+			$N$  & $3$ \\ \hline
+			$d_1$  & $0.5$ at $t=30[s]$\\ \hline
+			$d_2$  & $-0.2$ at $t=60[s]$\\ \hline
+			$r$  & $0.3$ \\ \hline
+			$x_0$ & $[0; 0; 0]^\intercal$ \\ \hline
+			$t_s$ &  $0.7[s]$ \\ \hline
+			overshoot & $0.6\%$
+		\end{tabular} 		
+	}
+	\caption{Tuning and design parameters}
+	\label{tab:tab}
+\end{table}
+
+\figref{fig:input_output}a shows that the input constraint is satisfied, and in \figref{fig:input_output}b it can be seen that the zero offset-free tracking is also satisfied rejecting disturbances at different times. The low value of $R$ is to minimize the overshoot as much as possible which is $0.6\%$, the best $Q$ is $C^\intercal C$ where the settling time $t_s$ is around $0.7$. Also, the selection of $N=3$ was lowest possible to increase performance, \figref{fig:input_output}c.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[u(k)]{\includegraphics[width=0.48\linewidth]{figures/input}}
+	\subfigure[y(k) vs r(k)]{\includegraphics[width=0.48\linewidth]{figures/output}}
+	\subfigure[y(k) vs r(k)]{\includegraphics[width=0.48\linewidth]{figures/ts}}
+	\caption{Input and output}
+	\label{fig:input_output}
+\end{figure}
+
+\figref{fig:phaseplot} shows that the constraints are satisfied for the three states. And the cost value shown in \figref{fig:value} is relatively low due the low value of $R$.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[States vs step (k)]{\includegraphics[width=0.48\linewidth]{figures/states}}
+	\subfigure[x1(k) vs x2(k)]{\includegraphics[width=0.48\linewidth]{figures/phaseplot_x1x2}}
+	\subfigure[x1(k) vs x3(k)]{\includegraphics[width=0.48\linewidth]{figures/phaseplot_x1x3}}
+	\subfigure[x2 (k) vs x3(k)]{\includegraphics[width=0.48\linewidth]{figures/phaseplot_x2x3}}
+	\caption{States and phase plots}
+	\label{fig:phaseplot}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/value}
+	\caption{Cost value $J(k)$ function}
+	\label{fig:value}
+\end{figure}
+
+
+One of the drawbacks of the SSTO approach is that it does not have robustness because it needs a perfect model of the plant. Also, when $d >0.5$, the solution is infeasible, in order to handle bigger disturbances it is necessary to change the cost function, \cite{rossiter} shows an alternative solution.
+
+
+
+
+\begin{thebibliography}{99}
+	\bibitem{trodden} P. Trodden, Lecture Notes ACS616 2018/19
+	\bibitem{rossiter} S. Dughman, J.A. Rossiter, A survey of guaranteeing feasibility and stability in MPC during target changes 	9th International Symposium on Advanced Control of Chemical Processes, June 2015.
+\end{thebibliography}
+
+
+
+
+
+
+
+
+\end{document}
