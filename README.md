@@ -10,6 +10,7 @@ Matlab folder contains:
 - Cost matrices
 - Prediction matrices
 
-University of Sheffield, UK.     
-Course: ACS6116 - Advanced Industrial Control    
-Prof. Paul Trodden  
+Coursework project:
+- University of Sheffield, UK.     
+- Course: ACS6116 - Advanced Industrial Control    
+- Prof. Paul Trodden  
