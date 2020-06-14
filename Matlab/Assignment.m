@@ -1,5 +1,7 @@
 % ACS6116 
-% Paulo Loma
+% Paulo Loma Marconi
+% University of Sheffield, UK
+
 clear variables; close all; clc;
 path('ACS6116_mcode',path); % temporal
 %%
@@ -88,7 +90,6 @@ uss = Tinv(4);
 % Optimization problem
 x_optVect = [xss; uss]; % vector x for optimization problem A*x<b
 
-
 fun = @(x_optVect)  ( C(1)*x_optVect(1)+Dd*d-r ) + rho*x_optVect(4) ;  
 x0_opt = [r, 0, 0, 0]; % init values
 
@@ -112,7 +113,6 @@ qu_ssto = qu-Pu*uss;
 % State constraints
 Px_ssto = Px; %
 qx_ssto = qx-Px*xss;
-
 
 % Cost matrices
 Q = (C'*C)*Qdesign; % Q^(1/2)
@@ -361,7 +361,6 @@ figure(1);
 % f = double(ineq);
 % surf(x1,x2,f);
 % view(0,90)            % rotate surface plot to top view
-
 
 
 % [x1,x2] = meshgrid( x(1),xs(2) );  % create a grid
