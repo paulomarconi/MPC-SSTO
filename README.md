@@ -5,13 +5,11 @@ The following document presents a constrained Linear Quadratic Model Predictive 
 The MPC control law uses Finite-Receding-Horizon method in dual-mode. Stability and recursive feasibility are guaranteed by off-line dual-mode and on-line optimization and the results are presented by Matlab simulation.
 
 Matlab folder contains:
->- Main (Assignment.m)
->- Constraints matrices
->- Cost matrices
->- Prediction matrices
+- Main (Assignment.m)
+- Constraints matrices
+- Cost matrices
+- Prediction matrices
 
 University of Sheffield, UK.     
 Course: ACS6116 - Advanced Industrial Control    
 Prof. Paul Trodden  
-
-
