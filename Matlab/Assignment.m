@@ -5,7 +5,7 @@
 clear variables; close all; clc;
 path('ACS6116_mcode',path); % temporal
 %%
-mode = 'reg'; %regulation=reg, tracking=trk
+mode = 'trk'; %regulation=reg, tracking=trk
 
 %% Global variables
 x0 = [0; 0; 0];
@@ -29,7 +29,7 @@ Ac = [-Dsys/Msys       1/Msys        0   ;
      -1/(Rsys*Tg)        0         -1/Tg  ];
 Bc = [0; 0; 1/Tg];
 
-if model_d==1
+if model_d==1 % don't change it
     Bd = [-1/Msys; 0; 0;]; % Bd=disturbance matrix
 else
     Bd = [0; 0; 0];
@@ -95,7 +95,7 @@ x0_opt = [r, 0, 0, 0]; % init values
 
 % Equality constraints
 Aeq = T; 
-beq = [Bd; r-Dd*d];
+beq = [Bd*d; r-Dd*d];
 % Inequality constraints
 Aopt = [Px, zeros(6,1); zeros(2,3), Pu]; 
 bopt = [qx; qu];
@@ -172,7 +172,7 @@ P = dlyap(Phi',S);
 % initialize
 x = x0;
 
-n = 3; m = 3;
+n = 3; m = 1;
 xs = zeros(n,nk+1);
 us = zeros(m,nk+1);
 

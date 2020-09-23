@@ -365,7 +365,7 @@ and using a proper deadbeat mode-2 terminal inequality constraint to ensure a fa
 	\textbf{I}_{n\times n}\otimes
 	\begin{bmatrix}
 	P_x\\
-	P_u~K
+	P_u~K_\infty
 	\end{bmatrix}
 	\begin{bmatrix}
 		(A+BK_\infty)^0\\
@@ -380,7 +380,7 @@ and using a proper deadbeat mode-2 terminal inequality constraint to ensure a fa
 {\underbrace{
 	\textbf{1}_n \otimes 
 	\begin{bmatrix}
-		q_x-Px~x_{ss}\\
+		q_x-P_x~x_{ss}\\
 		q_u-P_u~u_{ss}
 	\end{bmatrix}
 }_{\tilde{q}_{x_N}}
@@ -396,14 +396,14 @@ Thus, the SSTO problem is
 \begin{align}\label{eq:SSTO}
 \min_{\left\lbrace x_{ss},u_{ss} \right\rbrace } \|C~x_{ss}+D_d~d-r\|+\rho \|u_{ss}\|
 \end{align}
-subject to
+subject to,
 \begin{equation}\label{eq:constraintsSSTO}
 \begin{aligned}
 {\underbrace{
 	\begin{bmatrix}
 		I-A & -B\\
 		C & 0
-	\end{bmatrix}}_{A_{eq}}
+	\end{bmatrix}}_{A_{eq}=T}
 }
 {\underbrace{
 	\begin{bmatrix}
@@ -414,9 +414,11 @@ subject to
 &=
 {\underbrace{
 	\begin{bmatrix}
-		Bd~d\\
-		r-D_d~d
-	\end{bmatrix}}_{b_{eq}}
+		B_d\\
+		r-D_d
+	\end{bmatrix} 
+	d 
+	}_{b_{eq}}	
 }
 \\
 {\underbrace{
@@ -567,9 +569,9 @@ The tuning and design parameters, as well as the simulation value results are sh
 
 \begin{figure}[H]
 	\centering
-	\subfigure[u(k)]{\includegraphics[width=0.48\linewidth]{figures/input}}
-	\subfigure[y(k) vs r(k)]{\includegraphics[width=0.48\linewidth]{figures/output}}
-	\subfigure[y(k) vs r(k)]{\includegraphics[width=0.48\linewidth]{figures/ts}}
+	\subfigure[u(k)]{\includegraphics[width=0.7\linewidth]{figures/input}}
+	\subfigure[y(k) vs r(k)]{\includegraphics[width=0.7\linewidth]{figures/output}}
+	\subfigure[y(k) vs r(k)]{\includegraphics[width=0.7\linewidth]{figures/ts}}
 	\caption{Input and output}
 	\label{fig:input_output}
 \end{figure}
@@ -578,10 +580,10 @@ The tuning and design parameters, as well as the simulation value results are sh
 
 \begin{figure}[H]
 	\centering
-	\subfigure[States vs step (k)]{\includegraphics[width=0.48\linewidth]{figures/states}}
-	\subfigure[x1(k) vs x2(k)]{\includegraphics[width=0.48\linewidth]{figures/phaseplot_x1x2}}
-	\subfigure[x1(k) vs x3(k)]{\includegraphics[width=0.48\linewidth]{figures/phaseplot_x1x3}}
-	\subfigure[x2 (k) vs x3(k)]{\includegraphics[width=0.48\linewidth]{figures/phaseplot_x2x3}}
+	\subfigure[States vs step (k)]{\includegraphics[width=0.7\linewidth]{figures/states}}
+	\subfigure[x1(k) vs x2(k)]{\includegraphics[width=0.7\linewidth]{figures/phaseplot_x1x2}}
+	\subfigure[x1(k) vs x3(k)]{\includegraphics[width=0.7\linewidth]{figures/phaseplot_x1x3}}
+	\subfigure[x2 (k) vs x3(k)]{\includegraphics[width=0.7\linewidth]{figures/phaseplot_x2x3}}
 	\caption{States and phase plots}
 	\label{fig:phaseplot}
 \end{figure}
