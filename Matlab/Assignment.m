@@ -4,6 +4,9 @@
 
 clear variables; close all; clc;
 path('ACS6116_mcode',path); % temporal
+
+% options = optimoptions(@quadprog,'MaxIterations',1000,'ConstraintTolerance',1e-12,'Display','off');
+options = optimset('Display','off');
 %%
 mode = 'trk'; %regulation=reg, tracking=trk
 
@@ -12,7 +15,7 @@ x0 = [0; 0; 0];
 r = 0.3; % reference
 
 model_d = 1; % model with disturbance, 1=yes, 0=no
-d = 0; % init value of the perturbation value
+d = 0; % init value of the perturbation
 
 N = 3;  % Horizon increase N and cost value J(k) is reduced
 nk = 80; % simulation steps
@@ -101,7 +104,7 @@ Aopt = [Px, zeros(6,1); zeros(2,3), Pu];
 bopt = [qx; qu];
 
 % Minimization 
-[f,fval] = fmincon(fun,x0_opt,Aopt,bopt,Aeq,beq);
+[f,fval] = fmincon(fun,x0_opt,Aopt,bopt,Aeq,beq,[],[],[],options);
 xss = f(1:3)';
 uss = f(4);
 yss = C*xss+Dd*d;
@@ -199,7 +202,7 @@ for k = 1:nk+1
         beq = [Bd*d; r-Dd*d];
 
         % Minimization 
-        [f,fval] = fmincon(fun,x0_opt,Aopt,bopt,Aeq,beq);
+        [f,fval] = fmincon(fun,x0_opt,Aopt,bopt,Aeq,beq,[],[],[],options);
         xss = f(1:3);
         uss = f(4);
         yss = C*xss+Dd*d;
@@ -228,9 +231,9 @@ for k = 1:nk+1
     
     % Constrained MPC control law (RH-FH) LQ-MPC at every step k        
     if mode == 'reg'
-        [Ustar,fval,flag] = quadprog(H,L*x,Pc,qc+Sc*x); 
+        [Ustar,fval,flag] = quadprog(H,L*x,Pc,qc+Sc*x,[],[],[],[],[],options); 
     elseif mode == 'trk'
-        [NUstar,fval,flag] = quadprog(H,L*epsilon(:,k),Pc_ssto,qc_ssto+Sc_ssto*epsilon(:,k)); 
+        [NUstar,fval,flag] = quadprog(H,L*epsilon(:,k),Pc_ssto,qc_ssto+Sc_ssto*epsilon(:,k),[],[],[],[],[],options); 
     end
     % check feasibility
     if flag < 1 
@@ -268,7 +271,7 @@ xs2 = xs_aux(:,2)';
 xs3 = xs_aux(:,3)';
 
 %% Plotting
-t = Ts*(0:nk); % time simulation
+t = Ts*(0:nk); % simulation time
 
 figure(1); 
     subplot(3,3,1);
